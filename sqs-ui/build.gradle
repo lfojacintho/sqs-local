@@ -1,0 +1,40 @@
+group 'me.lfojacintho'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task fatJar(type: Jar) {
+    baseName = 'sqs-ui'
+
+    manifest {
+        attributes 'Implementation-Title': baseName,
+                'Implementation-Version': version,
+                'Main-Class': 'me.lfojacintho.sqsui.Main'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
+
+ext {
+    sparkVersion='2.5.5'
+    sqsSdkVersion='1.11.109'
+    sl4jVersion='1.7.25'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+    compile "com.sparkjava:spark-core:${sparkVersion}"
+    compile "com.sparkjava:spark-template-thymeleaf:${sparkVersion}"
+    compile "com.amazonaws:aws-java-sdk-sqs:${sqsSdkVersion}"
+    compile "org.slf4j:slf4j-simple:${sl4jVersion}"
+}
