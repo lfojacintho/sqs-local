@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>SQS Local</title>
 </head>
 <body>
-<h1 th:text="${message}">Text inside tag will be replaced by ${message}</h1>
+<button type="button">Create New Queue</button> |
+<button type="button" disabled>Send a Message</button>
+<button type="button" disabled>View/Delete Messages</button>
+
+<br />
+<br />
+
+<table class="queueList" border="1px">
+    <thead>
+        <tr>
+            <th><input type="checkbox" name="selectAll" /></th>
+            <th>Name</th>
+            <th>Messages Available</th>
+            <th>Messages in Flight</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div th:if="${queueList.empty}">
+            <td colspan="5"><p align="center"><i>You have no queue configured.</i></p></td>
+        </div>
+        <div th:unless="${queueList.empty}">
+            <tr th:each="queue : ${queueList}">
+                <td><input type="checkbox" name="select" /></td>
+                <td th:text="${queue.name}">Queue Name</td>
+                <td th:text="${queue.messagesAvailable}">0</td>
+                <td th:text="${queue.messagesInFlight}">0</td>
+                <td th:text="${queue.created}">Now</td>
+            </tr>
+        </div>
+    </tbody>
+</table>
 </body>
 </html>
