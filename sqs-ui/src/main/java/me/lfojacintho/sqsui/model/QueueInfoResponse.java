@@ -12,13 +12,13 @@ public class QueueInfoResponse implements Serializable {
 
     private final String name;
 
-    private final long messagesAvailable;
+    private final int messagesAvailable;
 
-    private final long messagesInFlight;
+    private final int messagesInFlight;
 
     private final LocalDateTime created;
 
-    public QueueInfoResponse(final String name, final long messagesAvailable, final long messagesInFlight,
+    public QueueInfoResponse(final String name, final int messagesAvailable, final int messagesInFlight,
                              final LocalDateTime created) {
         this.name = name;
         this.messagesAvailable = messagesAvailable;
@@ -30,11 +30,11 @@ public class QueueInfoResponse implements Serializable {
         return name;
     }
 
-    public long getMessagesAvailable() {
+    public int getMessagesAvailable() {
         return messagesAvailable;
     }
 
-    public long getMessagesInFlight() {
+    public int getMessagesInFlight() {
         return messagesInFlight;
     }
 
